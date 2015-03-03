@@ -1,0 +1,5 @@
+# The presence of this file indicates that this directory is a top-level moya project.
+#
+# The command line tool will look for this in the current directory and ancestors.
+#
+# Although the contents of this file are not currently read by Moya, in the future this file may be an INI file

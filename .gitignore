@@ -1,0 +1,9 @@
+*.orig
+*.project
+*.pyc
+*.egg
+*.egg-info
+*.db
+*.sqlite
+*.sublime_*
+/**/__*__

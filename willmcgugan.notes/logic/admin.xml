@@ -1,0 +1,23 @@
+<moya xmlns="http://moyaproject.com">
+
+    <module xmlns="http://moyaproject.com/admin"
+        slug="moya-notes" title="Notes" description="Notes Admin">
+        <link to="#admintable.books" title="Books"/>
+        <link to="#admintable.notes" title="Notes" />
+    </module>
+
+    <table xmlns="http://moyaproject.com/admin"
+        search="#Book.slug==q"
+        libname="admintable.books" slug="books" title="Books" model="#Book">
+        <column title="Slug" link="yes">${object.slug}</column>
+        <column title="Passphrase Hash">${object.passphrase}</column>
+    </table>
+
+    <table xmlns="http://moyaproject.com/admin"
+        search="#Note.noteid == q"
+        libname="admintable.notes" slug="notes" title="Notes" model="#Note">
+        <column title="NoteID" link="yes" sort="identity">${object.noteid}</column>
+        <column title="Book">${object.book}</column>
+    </table>
+
+</moya>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<moya xmlns="http://moyaproject.com"
+      xmlns:let="http://moyaproject.com/let"
+      xmlns:db="http://moyaproject.com/db"
+      xmlns:forms="http://moyaproject.com/forms"
+      xmlns:html="http://moyaproject.com/html"
+      xmlns:w="http://moyaproject.com/widgets">
+
+    <content libname="content.base" template="base.html">
+        <include-js path="js/jsonrpc.js" from="moya.jsonrpc" />
+        <include-js path="js/notes.js" />
+        <include-js path="js/wysihtml5-0.4.0pre.min.js" from="wysihtml5"/>
+        <include-js path="js/parser_rules/advanced.js" from="wysihtml5"/>
+
+        <include-css path="css/content.css" from="wysihtml5"/>
+        <include-css path="css/font-awesome.min.css" />
+        <include-css path="css/notes.css" />
+
+        <media-url path="css/content.css" from="wysihtml5" dst="css_url" />
+    </content>
+
+    <content libname="content.front" extends="#content.base" template="front.html"/>
+
+    <content libname="content.book" extends="#content.base" template="book.html">
+        <title>${book.slug}</title>
+        <include-js path="js/CryptoJS/v3.1.2/sha3.js" />
+        <include-js path="js/CryptoJS/v3.1.2/rabbit.js" />
+    </content>
+
+    <content libname="content.new_book" extends="#content.base">
+        <title>New Book</title>
+        <include-js path="js/CryptoJS/v3.1.2/sha3.js" />
+        <section name="content" if="not success">
+            <node template="components/loading.html" />
+            <w:info><markdown>Notebooks will be **unrecoverable** if you forget the passphrase!</markdown></w:info>
+            <render src="form"/>
+        </section>
+        <section name="content" if="success">
+            <w:success>New notebook was created successfully!</w:success>
+            <node template="components/newbook.html" let:url="url"/>
+        </section>
+    </content>
+
+</moya>

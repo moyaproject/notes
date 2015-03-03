@@ -1,0 +1,7 @@
+<moya xmlns="http://moyaproject.com">
+
+    <!-- Libraries will typically define a mountpoint to add URLs -->
+    <mountpoint name="main">
+    </mountpoint>
+
+</moya>

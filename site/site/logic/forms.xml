@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<moya xmlns="http://moyaproject.com">
+
+    <!-- Forms know how to render and validate themselves -->
+    <form libname="form.getname" legend="Hello World Form" style="horizontal" xmlns="http://moyaproject.com/forms">
+        <input name="name" label="What is your name?" class="input-xlarge" type="text" maxlength="30" required="yes"/>
+        <submit-button text="Submit" />
+    </form>
+
+</moya>

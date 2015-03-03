@@ -1,0 +1,84 @@
+<moya xmlns="http://moyaproject.com"
+      xmlns:rpc="http://moyaproject.com/jsonrpc"
+      xmlns:let="http://moyaproject.com/let"
+      xmlns:db="http://moyaproject.com/db"
+      xmlns:notes="http://www.willmcgugan.com/notes">
+
+    <!-- Use an enumeration so you can refer to error codes by a label -->
+    <enum libname="enum.jsonrpc.errors">
+        <value id="100" label="no_book">No such book</value>
+        <value id="101" label="invalid_pass">Pass was invalid, please unlock again</value>
+        <value id="102" label="no_note">The requested note was not found</value>
+    </enum>
+
+    <tag name="get-book">
+        <doc>Get a book object and validate a pass key</doc>
+        <signature>
+            <attribute name="pass" type="expression" missing="no"/>
+            <attribute name="slug" type="expression" missing="no"/>
+        </signature>
+
+        <db:query model="#Permission" dst="pass"
+            filter="#Permission.pass==pass and #Permission.book.slug==slug" />
+        <rpc:error code="invalid_pass" if="not pass"/>
+        <return value="pass.first.book" />
+    </tag>
+
+    <rpc:interface libname="jsonrpc.interface" errors="#enum.jsonrpc.errors">
+
+        <rpc:method name="unlock" description="unlock an existing book">
+            <doc>Unlock a book</doc>
+            <rpc:signature>
+                <rpc:parameter name="passphrase_hash" type="string" required="yes"/>
+                <rpc:parameter name="slug" required="yes"/>
+            </rpc:signature>
+
+            <var dst="expire_age">${.app.settings.unlock_expire}</var>
+            <let expire=".now - expire_age"/>
+            <db:query model="#Permission" filter="#Permission.created lt expire" action="delete" />
+            <db:get model="#Book" let:slug="slug" let:passphrase_hash="passphrase_hash" dst="book"/>
+            <return-dict let:unlocked="no" if="not book" />
+
+            <attempt times="10">
+                <make-token size="30" dst="token" />
+                <db:create model="#Permission" let:book="book" let:pass="token" dst="permission"/>
+            </attempt>
+
+            <return-dict let:unlocked="yes" let:pass="permission.pass"/>
+        </rpc:method>
+
+        <rpc:method name="set_note" description="set a note">
+            <doc>Set a note</doc>
+            <rpc:signature>
+                <rpc:parameter name="noteid" type="string" required="yes" />
+                <rpc:parameter name="pass" type="string" required="yes"/>
+                <rpc:parameter name="book" type="string" required="yes" />
+                <rpc:parameter name="text" type="string" required="yes" />
+            </rpc:signature>
+
+            <notes:get-book pass="pass" slug="book" dst="book"/>
+            <db:get-or-create model="#Note" let:book="book" let:noteid="noteid" dst="note"/>
+            <rpc:error code="no_note" if="not note"/>
+            <let note.text="text"/>
+            <db:commit />
+            <return-dict let:noteid="noteid"/>
+
+        </rpc:method>
+
+        <rpc:method name="get_note" description="get a note">
+            <doc>Get a note</doc>
+            <rpc:signature>
+                <rpc:parameter name="noteid" type="string" required="yes" />
+                <rpc:parameter name="pass" type="string" required="yes"/>
+                <rpc:parameter name="book" type="string" required="yes" />
+            </rpc:signature>
+
+            <notes:get-book pass="pass" slug="book" dst="book"/>
+            <db:get model="#Note" let:book="book" let:noteid="noteid" dst="note" />
+            <rpc:error code="no_note" if="not note"/>
+            <return-dict let:text="note.text" let:noteid="note.noteid" />
+        </rpc:method>
+
+    </rpc:interface>
+
+</moya>

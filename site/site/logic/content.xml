@@ -1,0 +1,10 @@
+<moya xmlns="http://moyaproject.com"
+      xmlns:links="http://moyaproject.com/links"
+      xmlns:html="http://moyaproject.com/html">
+
+    <content libname="content.base">
+
+    </content>
+
+</moya>
+

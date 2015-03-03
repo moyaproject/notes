@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<moya xmlns="http://moyaproject.com">
+    <!-- Here's were you might define your database models -->
+    <!--
+    <model name="Student" libname="Student" xmlns="http://moyaproject.com/db">
+        <string name="name" length="30" />
+        <string name="email" length="300" />
+    </model>
+    -->
+</moya>

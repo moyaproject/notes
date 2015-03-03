@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<moya xmlns="http://moyaproject.com">
+
+    <model libname="Book" xmlns="http://moyaproject.com/db">
+        <string name="slug" length="100" null="no" index="yes" />
+        <string name="passphrase_hash" length="1024" null="no" index="yes" />
+    </model>
+
+    <model libname="Note" xmlns="http://moyaproject.com/db">
+        <foreign-key name="book" model="#Book" null="no"/>
+        <string name="noteid" length="1024" null="no" index="yes" />
+        <text name="text" null="no" default="" />
+    </model>
+
+    <model libname="Permission" xmlns="http://moyaproject.com/db">
+        <datetime name="created" auto="yes" null="no" />
+        <foreign-key model="#Book" name="book" null="no" index="yes" />
+        <string name="pass" length="100" null="no" unique="yes"/>
+    </model>
+</moya>

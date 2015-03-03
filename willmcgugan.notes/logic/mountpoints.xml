@@ -1,0 +1,17 @@
+<moya xmlns="http://moyaproject.com"
+    xmlns:let="http://moyaproject.com/let">
+
+    <mountpoint name="main">
+        <url route="/" methods="GET,POST" view="#view.front" name="front" />
+        <url route="/~{book}" methods="GET" view="#view.book" name="book" />
+        <url route="/jsonrpc/" methods="GET,POST" view="#jsonrpc.interface" name="api" />
+        <url route="/new/" methods="GET,POST" view="#view.new_book" name="new_book" />
+        <url route="/~" methods="GET">
+            <redirect name="new_book"/>
+        </url>
+        <url route="/go/" methods="GET" name="go">
+            <redirect name="book" let:book=".request.GET.book" />
+        </url>
+    </mountpoint>
+
+</moya>

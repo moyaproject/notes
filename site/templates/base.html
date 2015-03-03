@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>{% block "title" %}${title}{% end %}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% media 'css/bootstrap.min.css' from 'bootstrap' %}" rel="stylesheet">
+
+    <!--[if IE]><link rel="shortcut icon" href="/favicon.ico"><![endif]-->
+    <link rel="icon" href="{% media 'favicon.png' from 'moya.favicon' %}">
+
+    {% block "includecss" %}{% render include.css %}{% end %}
+    {% block "css" %}{% render sections.css %}{% end %}
+    {% block "jshead" %}{% render sections.jshead %}{% end %}
+    {% block "head" %}{% render sections.head %}{% end %}
+  </head>
+
+  <body>
+
+    <div class="container">
+    {%- block "body" %}
+    {% render sections.body %}
+    {%- end %}
+    </div>
+
+    {% emptyblock "footer" %}
+
+    <script src="{% media 'js/jquery.js' from 'bootstrap' %}"></script>
+    <script src="{% media 'js/bootstrap.js' from 'bootstrap' %}"></script>
+
+    {% block "includejs" %}{% render include.js %}{% endblock %}
+    {% block "js" %}{% render sections.js unique %}{% endblock %}
+    {% block "jsfoot" %}{% render sections.jsfoot unique%}{% endblock %}
+
+</body></html>

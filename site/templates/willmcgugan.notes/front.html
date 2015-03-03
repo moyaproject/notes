@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block "content" %}
+<div class="alert alert-info">
+    This application is for testing only &mdash; please don't use it for anything important yet!
+</div>
+
+<h1>Encrypted Notes <small>${.apps.notes.lib.version}</small></h1>
+
+<p>
+    This is a encrypted note keeping application.
+</p>
+
+<p>
+    Notes are encrypted in the browser and stored in the <i>cloud</i>. So that even the admin of this site will be unable to read the contents!
+</p>
+
+<p class="text-warning">
+    If you forget your passphrase, your notes will be unrecoverable!
+</p>
+
+<p>
+    <a href="{% url 'new_book' %}" class="btn btn-primary">Create Encrypted Notebook</a>
+</p>
+{% endblock %}

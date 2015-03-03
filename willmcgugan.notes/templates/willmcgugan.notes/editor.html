@@ -1,0 +1,87 @@
+<div id="moya-editor" class="moya-editor" data-cssurl="${css_url}">
+            <div id="editor-toolbar" class="moya-editor-toolbar">
+                <div class="moya-editor-buttons clearfix">
+
+                    <a class="btn btn-primary btn-sm" data-wysihtml5-command="bold" title="ctrl+B" tabindex="-1">
+                        <i class="fa fa-bold"></i>
+                    </a>
+
+                    <a class="btn btn-primary btn-sm" data-wysihtml5-command="italic" title="ctrl+I" tabindex="-1">
+                        <i class="fa fa-italic"></i>
+                    </a>
+
+                    <a class="btn btn-primary btn-sm" data-wysihtml5-command="underline" title="ctrl+U" tabindex="-1">
+                        <i class="fa fa-underline"></i>
+                    </a>
+
+                    <a class="btn btn-primary btn-sm" data-wysihtml5-command="strikeThrough" title="Strikethrough" tabindex="-1">
+                        <i class="fa fa-strikethrough"></i>
+                    </a>
+
+                    <a class="btn btn-primary btn-sm" data-wysihtml5-command="insertUnorderedList" title="Unordered list" tabindex="-1">
+                        <i class="fa fa-list-ul"></i>
+                    </a>
+
+                    <a class="btn btn-primary btn-sm" data-wysihtml5-command="insertOrderedList" title="Ordered list" tabindex="-1">
+                        <i class="fa fa-list-ol"></i>
+                    </a>
+
+                    <a class="btn btn-primary btn-sm" data-wysihtml5-command="justifyLeft" title="Justify left" tabindex="-1">
+                        <i class="fa fa-align-left"></i>
+                    </a>
+
+                    <a class="btn btn-primary btn-sm" data-wysihtml5-command="justifyCenter" title="Justify center" tabindex="-1">
+                        <i class="fa fa-align-center"></i>
+                    </a>
+
+                    <a class="btn btn-primary btn-sm" data-wysihtml5-command="justifyRight" title="Justify right" tabindex="-1">
+                        <i class="fa fa-align-right"></i>
+                    </a>
+
+                    <a class="btn btn-primary btn-sm" data-wysihtml5-command="justifyFull" title="Justify" tabindex="-1">
+                        <i class="fa fa-align-justify"></i>
+                    </a>
+
+                    <a class="btn btn-primary btn-sm" data-wysihtml5-command="createLink" title="Create link" tabindex="-1">
+                        <i class="fa fa-link"></i>
+                    </a>
+                    <div class="moya-editor-dialog moya-editor-link-dialog" data-wysihtml5-dialog="createLink" style="display:none;">
+                        <input class="form-control input-sm" data-wysihtml5-dialog-field="href" value="http://" class="text" placeholder="Enter a URL">
+                        <div class="moya-editor-link-dialog-buttons">
+                            <a class="btn btn-default btn-sm" data-wysihtml5-dialog-action="save">OK</a>
+                            <a class="btn btn-primary btn-sm" data-wysihtml5-dialog-action="cancel">Cancel</a>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="moya-editor-dialog moya-editor-image-dialog" data-wysihtml5-dialog="insertImage" style="display:none;">
+
+                    <input class="form-control input-sm" data-wysihtml5-dialog-field="src" placeholder="Enter an image URL" class="text">
+
+                    <select class="form-control input-sm" data-wysihtml5-dialog-field="className">
+                        <option value="" selected="selected">align default</option>
+                        <option value="wysiwyg-float-left">align left</option>
+                        <option value="wysiwyg-float-right">align right</option>
+                    </select>
+
+                    <div class="moya-editor-link-dialog-buttons">
+                        <a class="btn btn-default btn-sm" data-wysihtml5-dialog-action="save">OK</a>
+                        <a class="btn btn-primary btn-sm" data-wysihtml5-dialog-action="cancel">Cancel</a>
+                    </div>
+                </div>
+                <div class="moya-editor-dialog moya-editor-link-dialog" data-wysihtml5-dialog="createLink" style="display:none;">
+                    <input class="form-control input-sm" data-wysihtml5-dialog-field="href" value="http://" class="text" placeholder="Enter a URL">
+                    <div class="moya-editor-link-dialog-buttons">
+                        <a class="btn btn-default btn-sm" data-wysihtml5-dialog-action="save">OK</a>
+                        <a class="btn btn-primary btn-sm" data-wysihtml5-dialog-action="cancel">Cancel</a>
+                    </div>
+                </div>
+            </div>
+            <textarea id="editor" class="moya-editor-textarea form-control ${field.class}" name="${name or field.name}" style="height:auto;">${field.value or ''}</textarea>
+            <div class="editor-buttons">
+                <button class="save-note btn btn-primary">Save</button>
+                <button class="cancel-note btn btn-default">Cancel</button>
+            </div>
+        </div>

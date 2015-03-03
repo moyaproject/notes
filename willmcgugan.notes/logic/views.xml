@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<moya xmlns="http://moyaproject.com"
+      xmlns:let="http://moyaproject.com/let"
+      xmlns:db="http://moyaproject.com/db"
+      xmlns:forms="http://moyaproject.com/forms">
+
+    <view libname="view.front" content="#content.front">
+    </view>
+
+    <view libname="view.book" content="#content.book">
+        <db:get model="#Book" let:slug="url.book" dst="book"/>
+        <redirect name="new_book" query="{'book':url.book}" if="not book" />
+        <get-url name="api" dst="rpc_url" />
+    </view>
+
+    <view libname="view.new_book" content="#content.new_book">
+        <forms:get form="#form.new_book" dst="form"/>
+
+        <forms:validate-post src="form">
+            <let slug="slug:form.data.slug" passphrase="form.data.passphrase"/>
+
+            <db:if-exists model="#Book" let:slug="slug">
+                <forms:error src="form">This book name is reserved, please pick another</forms:error>
+                <forms:bind src="form" let:passphrase="''" let:hashed="''"/>
+                <done/>
+            </db:if-exists>
+
+            <db:create model="#Book" let:slug="slug" let:passphrase_hash="passphrase" dst="book"/>
+            <let success="yes" />
+            <get-url name="book" let:book="book.slug" dst="url" />
+
+        </forms:validate-post>
+
+        <forms:bind src="form" let:passphrase="''" let:hashed="''"/>
+    </view>
+
+</moya>

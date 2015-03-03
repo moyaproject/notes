@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<moya xmlns="http://moyaproject.com"
+    xmlns:moya="http://moyaproject.com"
+    xmlns:w="http://moyaproject.com/widgets">
+
+    <form libname="form.new_book" xmlns="http://moyaproject.com/forms"
+        legend="New Notebook" style="horizontal" class="new-book">
+
+        <input name="slug" label="Book Name" class="input-xlarge" type="text" maxlength="1024" required="yes"
+            initial=".request.GET.book"
+            help="should consist of only of characters '0123456789abcdefghijklmnopqrstuvwxyz-'"/>
+        <password name="passphrase" label="Passphrase" class="input-xlarge" maxlength="1024" required="yes"
+            help="passphrases are more memorable and secure than passwords"/>
+
+        <hidden-input required="no" name="hashed" />
+        <submit-button text="Create"/>
+
+        <validate-field field="slug">
+            <fail if="value != slug:value">Not a valid slug, please edit this field</fail>
+        </validate-field>
+    </form>
+
+</moya>

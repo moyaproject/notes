@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+
+{% block "content" %}
+
+<div id="Book" class="notes locked" data-rpcurl="${rpc_url}" data-book="${book.slug}">
+
+    <div class="unlocker start">
+        <div class="loading">
+            <i class="fa fa-refresh fa-spin"></i>
+        </div>
+        <div class="well">This notebook is locked.</div>
+        <div class="alert alert-danger passphrase-incorrect">Passphrase was incorrect&mdash;please try again</div>
+        <form class="passphrase" method="POST">
+            <input class="form-control input-lg" name="passphrase" type="password" placeholder="Enter passphrase to unlock" />
+        </form>
+    </div>
+
+    <div class="interface mode-search">
+
+        <div class="loading">
+            <i class="fa fa-refresh fa-spin"></i>
+        </div>
+
+        <div class="note-search">
+            <div class="controls">
+                <input class="form-control search" name="search" placeholder="Search or Create" autocomplete="off" />
+            </div>
+            <div class="notes-list">
+                <table class="table table-condensed">
+                    <tbody>
+                        {% for note in notes.index %}
+                        <tr{% if forloop.first %} class="active"{% endif %}>
+                            <td>${note.title}</td>
+                            <td>${note.created}</td>
+                            <td>${note.updated}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="note-edit">
+            <input type="hidden" name="noteid" value="" />
+            <input class="form-control" name="title" placeholder="Title"/>
+            {% include "editor.html" %}
+        </div>
+
+        <div class="dialogs">
+            <div class="deleted-note well well-sm">
+                <span class="text">Note Blah Blah was deleted</span>
+                <button class="btn btn-primary btn-info undo">Undo</button>
+            </div>
+        </div>
+
+        <div class="note empty">
+            <h2>
+                <span class="title"></span>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <i class="fa fa-cog"></i>
+                    </button>
+                    <ul class="dropdown-menu" rolw="menu">
+                        <li><a href="#" class="edit-action"><i class="fa fa-pencil-square-o"></i> edit</a></li>
+                        <li><a href="#" class="delete-action"><i class="fa fa-trash-o"></i> delete</a></li>
+                    </ul>
+                </div>
+            </h2>
+            <div class="content"></div>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
