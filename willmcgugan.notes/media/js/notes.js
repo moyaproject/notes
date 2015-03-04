@@ -437,6 +437,7 @@ function Book(note_selector, options)
             self.update_index();
             self.refresh_index();
             self.$search.focus();
+            self.$index.show();
         }
         var on_error = function(code, error)
         {
