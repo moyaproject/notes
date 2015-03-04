@@ -625,7 +625,7 @@ function Book(note_selector, options)
             var note = filtered_index[i];
             var title = titles[i];
             var classes = ['row-' + row];
-            if(i == self.selection)
+            if(row == self.selection)
             {
                 classes.push('active');
             }
