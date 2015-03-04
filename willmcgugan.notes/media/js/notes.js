@@ -436,14 +436,15 @@ function Book(note_selector, options)
             self.index = index || [];
             self.update_index();
             self.refresh_index();
+            self.$search.blur();
             self.$search.focus();
-            self.$index.show();
         }
         var on_error = function(code, error)
         {
             self.index = [];
             self.update_index();
             self.refresh_index();
+            self.$search.blur();
             self.$search.focus();
         }
         self.rpc.call('get_note',
