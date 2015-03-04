@@ -10,7 +10,7 @@
         search="#Book.slug==q"
         libname="admintable.books" slug="books" title="Books" model="#Book">
         <column title="Slug" link="yes">${object.slug}</column>
-        <column title="Passphrase Hash">${object.passphrase}</column>
+        <column title="Passphrase Hash">${object.passphrase_hash}</column>
     </table>
 
     <table xmlns="http://moyaproject.com/admin"
