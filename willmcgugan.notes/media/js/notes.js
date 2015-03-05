@@ -60,6 +60,7 @@ function Book(note_selector, options)
     self.$interface = self.$book.find('.interface');
     self.$index = self.$book.find('.notes-list');
     self.$search = self.$book.find('.controls input.search');
+    self.$search_area = self.$book.find('note-seatch');
     self.$edit = self.$book.find('.note-edit');
     self.$note = self.$book.find('.note');
     self.$dialogs = self.$book.find('.dialogs');
@@ -130,6 +131,9 @@ function Book(note_selector, options)
         }
         else if (action == 'open')
         {
+            self.selection = selection;
+            self.refresh_selection();
+            self.$dialogs.find('.deleted-note').hide();
             var noteid = $selection.data('noteid');
             $selection.addClass('selected');
             self.select_note(noteid);
@@ -140,10 +144,7 @@ function Book(note_selector, options)
     {
         self.$search.val('');
         self.$index.fadeOut('fast');
-
         self.edit_note('', title, '<p></p>');
-
-
     }
 
     self.delete_note = function(noteid)
@@ -235,7 +236,6 @@ function Book(note_selector, options)
             self.$note.find('.content').html(text);
             self.refresh_index();
 
-            self.$dialogs.hide();
             self.$note.show();
             self.set_mode('search');
         }
@@ -266,11 +266,13 @@ function Book(note_selector, options)
     /* self.$book.removeClass('locked'); */
 
     self.$book.find('.cancel-note').click(function(e){
+        e.stopPropagation();
         e.preventDefault();
         self.set_mode('search');
     });
 
     self.$book.find('.save-note').click(function(e){
+        e.stopPropagation();
         e.preventDefault();
         var noteid = self.$edit.find('input[name=noteid]').val() || makeid();
         var title = self.$edit.find('input[name=title]').val();
@@ -322,14 +324,25 @@ function Book(note_selector, options)
     });
 
     self.$search.focus(function(e){
-        self.selection = 0;
+        /*self.selection = 0;*/
         self.refresh_selection();
     });
 
-    self.$search.blur(function(e){
+
+    $('.note-search').click(function(e){
+        e.stopPropagation();
+
+    });
+    $(document).click(function(e){
         self.selection = null;
-        setTimeout(function(){self.$index.fadeOut('fast');}, 200);
-        /*self.$index.hide();*/
+        self.$index.fadeOut('fast');
+    });
+    $(document).keyup(function(e){
+        if(e.which==27)
+        {
+            self.selection = null;
+            self.$index.fadeOut('fast');
+        }
     });
 
     self.$search.keyup(function(e)
@@ -352,7 +365,6 @@ function Book(note_selector, options)
         {
             self.selection = null;
             self.$index.fadeOut('fast');
-            self.$search.blur();
             e.preventDefault();
         }
         else if (e.which==UP)
@@ -392,6 +404,7 @@ function Book(note_selector, options)
         var $row = $(this);
         var row = $row.attr('name');
         self.on_selection(row);
+        self.$search.focus();
     });
 
     self.$note.find('.edit-action').click(function(e){
@@ -412,6 +425,7 @@ function Book(note_selector, options)
     });
 
     self.$book.find('.deleted-note button.undo').click(function(e){
+        e.stopPropagation();
         e.preventDefault();
         var $deleted = self.$book.find('.deleted-note');
         var data = $deleted.data();
