@@ -271,10 +271,7 @@ function Book(note_selector, options)
     /* self.$book.removeClass('locked'); */
 
     self.$book.find('.cancel-note').click(function(e){
-        if(!is_touch_device())
-        {
-            e.stopPropagation();
-        }
+        e.stopPropagation();
         e.preventDefault();
         self.set_mode('search');
     });
@@ -412,6 +409,12 @@ function Book(note_selector, options)
         var $row = $(this);
         var row = parseInt($row.attr('name'));
         self.on_selection(row);
+        if(is_touch_device())
+        {
+            self.$index.fadeout('fast');
+            return
+        }
+        e.stopPropagation();
         self.$search.focus();
     });
 
