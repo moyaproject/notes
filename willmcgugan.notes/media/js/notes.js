@@ -235,6 +235,7 @@ function Book(note_selector, options)
             self.$note.find('.content').html(text);
             self.refresh_index();
 
+            self.$dialogs.hide();
             self.$note.show();
             self.set_mode('search');
         }
