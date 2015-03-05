@@ -153,7 +153,7 @@ function Book(note_selector, options)
         {
             if(self.index[i].noteid==noteid)
             {
-                self.index.splice(i);
+                self.index.splice(i, 1);
                 break;
             }
         }
@@ -220,10 +220,12 @@ function Book(note_selector, options)
     self.select_note = function(noteid)
     {
         var note = self.notes[noteid];
-        self.display = noteid;
-        self.edit = noteid;
 
         var got_note = function(noteid, title, text){
+
+            self.display = noteid;
+            self.edit = noteid;
+
             self.$edit.find('input[name=noteid]').val(noteid);
             self.$edit.find('input[name=title]').val(title);
             editor.setValue(text);
