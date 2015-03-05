@@ -1,3 +1,8 @@
+function is_touch_device() {
+  return 'ontouchstart' in window // works on most browsers
+      || 'onmsgesturechange' in window; // works on ie10
+};
+
 function format(template, data)
 {
     return template.replace( /\${\s*(.*?)\s*}/g, function(m, n) {
@@ -266,7 +271,10 @@ function Book(note_selector, options)
     /* self.$book.removeClass('locked'); */
 
     self.$book.find('.cancel-note').click(function(e){
-        e.stopPropagation();
+        if(!is_touch_device())
+        {
+            e.stopPropagation();
+        }
         e.preventDefault();
         self.set_mode('search');
     });
