@@ -402,7 +402,7 @@ function Book(note_selector, options)
 
     self.$index.on('click', 'tr', function(e){
         var $row = $(this);
-        var row = $row.attr('name');
+        var row = parseInt($row.attr('name'));
         self.on_selection(row);
         self.$search.focus();
     });
@@ -568,9 +568,9 @@ function Book(note_selector, options)
         var $table = self.$index.find('table');
         var $active = self.$index.find('tr.active');
 
+
         if($active.length == 0)
         {
-            self.$index.fadeOut('fast');
             return;
         }
 
