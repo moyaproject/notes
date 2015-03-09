@@ -647,13 +647,13 @@ function Book(note_selector, options)
                 if(match)
                 {
                     filtered_index.push(note);
-                    titles.push(match || term);
+                    titles.push(match || escape_html(term));
                 }
             }
             else
             {
                 filtered_index.push(note);
-                titles.push(term);
+                titles.push(escape_html(term));
             }
         }
 
@@ -675,7 +675,7 @@ function Book(note_selector, options)
                 "row": row,
                 "note": note,
                 "cls": cls,
-                "title": escape_html(title)
+                "title": title
             }
             var row_html = format(row_template, td);
             rows.push(row_html);
