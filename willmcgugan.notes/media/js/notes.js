@@ -1,3 +1,12 @@
+function escape_html(unsafe) {
+    return unsafe
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+         .replace(/'/g, "&#039;");
+ }
+
 function is_touch_device() {
   return 'ontouchstart' in window // works on most browsers
       || 'onmsgesturechange' in window; // works on ie10
@@ -29,7 +38,7 @@ function fuzzy_match(text, search)
     {
         if(i < search.length && text[n].toLowerCase() == search[i].toLowerCase())
         {
-            tokens.push('<span class="search-highlight">' + text[n] + '</span>');
+            tokens.push('<span class="search-highlight">' + escape_html(text[n]) + '</span>');
             i += 1;
         }
         else
@@ -620,7 +629,7 @@ function Book(note_selector, options)
         var row = 0;
         if(search)
         {
-            var row_html = format(search_template, {'search': search});
+            var row_html = format(search_template, {'search': escape_html(search)});
             rows.push(row_html);
             row += 1
         }
@@ -666,7 +675,7 @@ function Book(note_selector, options)
                 "row": row,
                 "note": note,
                 "cls": cls,
-                "title": title
+                "title": escape_html(title)
             }
             var row_html = format(row_template, td);
             rows.push(row_html);
