@@ -43,7 +43,7 @@ function fuzzy_match(text, search)
         }
         else
         {
-            tokens.push(text[n])
+            tokens.push(escape_html(text[n]))
         }
     }
     if (i != search.length)
@@ -184,8 +184,8 @@ function Book(note_selector, options)
     {
         function cmp_titles(a, b)
         {
-            var title_a = a['title'];
-            var title_b = b['title']
+            var title_a = a['title'].toLowerCase();
+            var title_b = b['title'].toLowerCase();
             if (title_a < title_b) {return -1;}
             if (title_a > title_b) {return +1;}
             return 0;
