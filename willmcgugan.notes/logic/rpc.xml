@@ -6,9 +6,9 @@
 
     <!-- Use an enumeration so you can refer to error codes by a label -->
     <enum libname="enum.jsonrpc.errors">
-        <value id="100" label="no_book">No such book</value>
-        <value id="101" label="invalid_pass">Pass was invalid, please unlock again</value>
-        <value id="102" label="no_note">The requested note was not found</value>
+        <value id="100" name="no_book">No such book</value>
+        <value id="101" name="invalid_pass">Pass was invalid, please unlock again</value>
+        <value id="102" name="no_note">The requested note was not found</value>
     </enum>
 
     <tag name="get-book">
@@ -30,7 +30,7 @@
             <doc>Unlock a book</doc>
             <rpc:signature>
                 <rpc:parameter name="passphrase_hash" type="string" required="yes"/>
-                <rpc:parameter name="slug" required="yes"/>
+                <rpc:parameter name="slug" type="string" required="yes"/>
             </rpc:signature>
 
             <var dst="expire_age">${.app.settings.unlock_expire}</var>
