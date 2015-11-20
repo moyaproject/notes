@@ -2,53 +2,7 @@
 
 
 {% block "css" %}
-{#
-<style>
-
-    .notes
-    {
-        margin-top:20px;
-        /*background-color:#fff;*/
-    }
-
-    .notes .note
-    {
-        margin-top:20px;
-    }
-
-    .notes-list
-    {
-        height:200px;
-        position:relative;
-        z-index:10;
-        overflow:auto;
-    }
-
-    .notes-list table
-    {
-        margin:0px;
-        padding:0px;
-    }
-
-    .notes input.search
-    {
-
-    }
-
-    .notes-list table tr td
-    {
-        border:0;
-    }
-
-    .notes .note .title
-    {
-
-    }
-
-</style>
-#}
 {% endblock %}
-
 
 {% block "body" %}
 <input type="hidden" name="notes_api" value="{% url 'api' %}" />
@@ -67,7 +21,7 @@
                 </button>
                 <a class="navbar-brand" href="{% url 'front' %}">
                     <i class="fa fa-lock"></i>
-                    Notes <span class="text-warning">beta</span>
+                    Notes
                 </a>
               </div>
 
@@ -80,21 +34,6 @@
                         </div>
                         <button type="submit" class="btn btn-default">Go</button>
                     </form>
-                    {#
-                    <li><a href="#">Link</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">One more separated link</a></li>
-                        </ul>
-                    </li>
-                    #}
                 </ul>
             </div>
         </nav>
@@ -108,4 +47,3 @@
 </div>
 
 {% endblock %}
-
