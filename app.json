@@ -1,0 +1,47 @@
+{
+    "name": "Moya Encrypted Notes",
+    "description": "A note-taking application that encrypts notes in the browser",
+    "repository": "https://github.com/moyaproject/notes",
+    "success_url": "/",
+    "keywords": [
+        "moya",
+        "notes",
+        "encryption"
+    ],
+    "scripts": {
+        "postdeploy": "moya db sync && moya auth#cmd.init --username $SUPER_USER --password $SUPER_PASSWORD --email $SUPER_EMAIL"
+    },
+    "env": {
+        "SUPER_USER": {
+            "value": "admin",
+            "description": "Super user's username, enter your username here"
+        },
+        "SUPER_EMAIL": {
+            "value": "",
+            "description": "Enter your email address here"
+        },
+        "SUPER_PASSWORD": {
+            "value": "admin",
+            "description": "Super user's password (change it when you first log in)"
+        },
+        "MOYA_SECRET": {
+            "description": "Some random characters for cookies and CSRF detection",
+            "generator": "secret"
+        },
+        "MOYA_DEBUG": {
+            "description": "Set to 'yes' to enable debug mode (you can enable it later if you need to)",
+            "value": "no"
+        },
+        "MOYA_PROJECT": {
+            "value": "/app/heroku",
+            "description": "The /heroku directory contains custom setting for the Herokou platform"
+        },
+        "MOYA_PROJECT_INI": {
+            "value": "heroku.ini",
+            "description": "INI file to load settings from ('heroku.ini' for Heroki platform)"
+        }
+    },
+    "addons": [
+        "heroku-postgresql:hobby-dev"
+    ]
+}
