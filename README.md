@@ -20,4 +20,10 @@ You might be interested in the backend, which is a simple JSONRPC api:
 
 http://notes.moyaproject.com/jsonrpc/
 
+## Deploy to Heroku
+
+<a href="https://heroku.com/deploy?template=https://github.com/moyaproject/notes">
+  <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
+</a>
+
 
